@@ -16,10 +16,7 @@ public class Job {
 // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
-    public Job() {
-        this.id = nextId;
-        nextId++;
-    }
+
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this.name = name;
@@ -28,13 +25,17 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
+    public Job() {
+        this.id = nextId;
+        nextId++;
+    }
 // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
         return id == job.id;
     }
@@ -43,6 +44,7 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.

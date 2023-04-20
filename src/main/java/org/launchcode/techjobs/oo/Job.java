@@ -93,4 +93,31 @@ public class Job {
     public CoreCompetency getCoreCompetency() {
         return coreCompetency;
     }
+
+    @Override
+    public String toString() {
+        if (name == null ){
+            name = "Data not available";
+        }
+        if (employer == null){
+            employer = new Employer("Data not available");
+        }
+        if (location == null){
+            location = new Location("Data not available");
+        }
+        if (positionType == null){
+            positionType =new PositionType("Data not available");
+        }
+        if (coreCompetency == null){
+            coreCompetency = new CoreCompetency("Data not available");
+        }
+        return "_" +
+                "\nID: " + id +
+                "\nName: " + name  +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location +
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency +
+                "\n_";
+    }
 }

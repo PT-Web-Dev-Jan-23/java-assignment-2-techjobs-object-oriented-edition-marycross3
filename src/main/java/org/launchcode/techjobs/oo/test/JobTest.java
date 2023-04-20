@@ -38,5 +38,42 @@ public class JobTest {
         Job photographer2 = new Job("Multimedia Coordinator",new Employer("STL City"), new Location("St.Louis"), new PositionType("photographer"), new CoreCompetency("Social Media"));
         assertFalse("jobs have different IDs", !photographer.equals(photographer2));
     }
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), new PositionType("part time babysitter"), new CoreCompetency("Energetic"));
+        String jobListing = babysitter.toString();
+        assertEquals("testing to string starts with new line","_", String.valueOf(jobListing.charAt(0)));
+        assertEquals("testing to string ends with new line","_", String.valueOf(jobListing.charAt(jobListing.length()-1)));
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), new PositionType("part time babysitter"), new CoreCompetency("Energetic"));
+        String jobListing = babysitter.toString();
+        String expected = "_" +
+                "\nID: 0" +
+                "\nName: nanny" +
+                "\nEmployer: The Carsons"+
+                "\nLocation: St.Louis"+
+                "\nPosition Type: part time babysitter"+
+                "\nCore Competency: Energetic" +
+                "\n_";
+        assertEquals("to string method prints correctly",expected, jobListing);
+
+    }
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), null, new CoreCompetency("Energetic"));
+        String jobListing = babysitter.toString();
+        String expected = "_" +
+                "\nID: 0" +
+                "\nName: nanny" +
+                "\nEmployer: The Carsons"+
+                "\nLocation: St.Louis"+
+                "\nPosition Type: Data not available"+
+                "\nCore Competency: Energetic" +
+                "\n_";
+        assertEquals("to string method prints data not available if field is blank", expected, jobListing);
+
+    }
 
 }

@@ -21,11 +21,11 @@ public class JobTest {
     @Test
     public void testJobConstructorSetsAllFields(){
         Job productTester = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertEquals("Name of job is correct",productTester.getName(),"Product tester");
-        assertEquals("employer of job is correct",productTester.getEmployer().toString(),"ACME");
-        assertEquals("location of job is correct",productTester.getLocation().toString(),"Desert");
-        assertEquals("position type of job is correct",productTester.getPositionType().toString(),"Quality control");
-        assertEquals("core competency type of job is correct",productTester.getCoreCompetency().toString(),"Persistence");
+        assertEquals(productTester.getName(),"Product tester");
+        assertEquals(productTester.getEmployer().toString(),"ACME");
+        assertEquals(productTester.getLocation().toString(),"Desert");
+        assertEquals(productTester.getPositionType().toString(),"Quality control");
+        assertEquals(productTester.getCoreCompetency().toString(),"Persistence");
         assertTrue(productTester instanceof Job);
         assertTrue(productTester.getEmployer() != null);
         assertTrue(productTester.getLocation() instanceof Location);
@@ -36,43 +36,45 @@ public class JobTest {
     public void testJobsForEquality(){
         Job photographer = new Job("Multimedia Coordinator",new Employer("STL City"), new Location("St.Louis"), new PositionType("photographer"), new CoreCompetency("Social Media"));
         Job photographer2 = new Job("Multimedia Coordinator",new Employer("STL City"), new Location("St.Louis"), new PositionType("photographer"), new CoreCompetency("Social Media"));
-        assertFalse("jobs have different IDs", !photographer.equals(photographer2));
+        assertFalse(photographer.equals(photographer2));
     }
     @Test
     public void testToStringStartsAndEndsWithNewLine(){
         Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), new PositionType("part time babysitter"), new CoreCompetency("Energetic"));
         String jobListing = babysitter.toString();
-        assertEquals("testing to string starts with new line","_", String.valueOf(jobListing.charAt(0)));
-        assertEquals("testing to string ends with new line","_", String.valueOf(jobListing.charAt(jobListing.length()-1)));
+        char beginning = jobListing.charAt(0);
+        char end = jobListing.charAt(jobListing.length()-1);
+        System.out.println("this"+beginning+"something");
+        System.out.println("\n"+"ok");
+        assertEquals('\n', beginning);
+        assertEquals('\n', end);
     }
     @Test
     public void testToStringContainsCorrectLabelsAndData(){
         Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), new PositionType("part time babysitter"), new CoreCompetency("Energetic"));
         String jobListing = babysitter.toString();
-        String expected = "_" +
-                "\nID: 0" +
+        String expected = "\nID: " +babysitter.getId()+
                 "\nName: nanny" +
                 "\nEmployer: The Carsons"+
                 "\nLocation: St.Louis"+
                 "\nPosition Type: part time babysitter"+
                 "\nCore Competency: Energetic" +
-                "\n_";
-        assertEquals("to string method prints correctly",expected, jobListing);
+                "\n";
+        assertEquals(expected, jobListing);
 
     }
     @Test
     public void testToStringHandlesEmptyField(){
-        Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), null, new CoreCompetency("Energetic"));
+        Job babysitter = new Job("nanny",new Employer("The Carsons"), new Location("St.Louis"), new PositionType(""), new CoreCompetency("Energetic"));
         String jobListing = babysitter.toString();
-        String expected = "_" +
-                "\nID: 0" +
+        String expected = "\nID: " +babysitter.getId()+
                 "\nName: nanny" +
                 "\nEmployer: The Carsons"+
                 "\nLocation: St.Louis"+
                 "\nPosition Type: Data not available"+
                 "\nCore Competency: Energetic" +
-                "\n_";
-        assertEquals("to string method prints data not available if field is blank", expected, jobListing);
+                "\n";
+        assertEquals(expected, jobListing);
 
     }
 
